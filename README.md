@@ -34,3 +34,10 @@ Useful for summarising the layout of a set of files (a build manifest, a diff, a
 ## API
 
 - `render_tree(paths)` — `paths` is an iterable of path strings. Returns a string with lines joined by `\n`, no trailing newline.
+
+## Design notes
+
+The window stores values eagerly rather than keeping running aggregates. Running
+sums drift with floating point over long streams, and recomputing from a small
+buffer is cheap enough that the drift is not worth the speed.
+
